@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2-Week Chicken & Veg Plan • 1250 kcal/day</title>
+  <meta name="description" content="Interactive 14-day meal plan using only chicken breast, carrots, broccoli, and potatoes. Budget-friendly, prep-once options, gram measurements, printable." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <section class="hero" aria-label="Meal plan intro">
+        <div class="titleRow">
+          <div>
+            <h1>2-Week Chicken & Veg Plan</h1>
+            <div class="subtitle">
+              Only <b>chicken breast</b>, <b>carrots</b>, <b>broccoli</b>, and <b>potatoes</b>.
+              Designed to feel varied through texture and technique while staying around <b>≤ 1250 kcal/day</b>.
+            </div>
+            <div class="smallNote">
+              <span class="dot" aria-hidden="true"></span>
+              <span>Seasonings are welcome (salt, pepper, garlic, paprika, herbs, chili).</span>
+              <span class="pill"><strong>Budget</strong> friendly • Grocery-store staples</span>
+            </div>
+          </div>
+          <div class="pill" title="Click any day to focus it.">✨ Interactive</div>
+        </div>
+      </section>
+
+      <aside class="panel" aria-label="Controls">
+        <h2>Controls</h2>
+        <div class="controls">
+          <div>
+            <label for="servings">Servings multiplier</label>
+            <input id="servings" type="number" min="0.5" max="4" step="0.5" value="1" />
+          </div>
+          <div>
+            <label for="daySelect">Jump to day</label>
+            <select id="daySelect"></select>
+          </div>
+          <div class="full">
+            <label for="search">Search meals / techniques</label>
+            <input id="search" type="text" placeholder="Try: soup, crispy, mash, tray, paprika..." />
+          </div>
+        </div>
+
+        <div class="btnRow">
+          <button id="togglePrep" class="secondary" type="button">Prep-once Mode</button>
+          <button id="print" class="ghost" type="button">Print</button>
+          <button id="reset" class="ghost" type="button" title="Clears all checkmarks (keeps plan)">Reset checks</button>
+        </div>
+
+        <div class="footerRow">
+          <div>Tip: <span class="kbd">/</span> focuses search, <span class="kbd">Esc</span> clears.</div>
+          <div id="saveStatus" aria-live="polite">Saved ✓</div>
+        </div>
+      </aside>
+    </header>
+
+    <main class="main">
+      <section class="card" aria-label="Meal plan">
+        <div class="cardHeader">
+          <h2>14 Days</h2>
+          <div class="hint">Tap ✓ to track completed meals. Stored locally in your browser.</div>
+        </div>
+        <div id="grid" class="grid"></div>
+      </section>
+
+      <aside class="side" aria-label="Sidebar">
+        <section class="card box" aria-label="Daily totals">
+          <h3>Today’s progress</h3>
+          <div class="muted" id="progressText">Select a day to see completion and kcal.</div>
+          <div class="bar" aria-hidden="true"><div id="barFill"></div></div>
+          <div class="chipRow" id="chips"></div>
+        </section>
+
+        <section class="card box" aria-label="Exact grams">
+          <h3>Exact gram targets (selected day)</h3>
+          <div class="muted">
+            Click a meal’s <b>“Details”</b> to view its gram recipe.
+            Use the multiplier to scale everything.
+          </div>
+          <ul class="list" id="gramsList"></ul>
+        </section>
+
+        <section class="card box" aria-label="Budget shopping list">
+          <h3>2-week shopping list</h3>
+          <div class="muted">Calculated from the full 14-day plan (scaled). Includes a small buffer.</div>
+          <ul class="list" id="shopList"></ul>
+          <div class="chipRow">
+            <span class="chip"><b>Budget note:</b> buy frozen broccoli if cheaper.</span>
+            <span class="chip"><b>Stretch:</b> larger potato bags save $/lb.</span>
+          </div>
+        </section>
+
+        <section class="card box" aria-label="Prep-once guide" id="prepBox" hidden>
+          <h3>Prep-once guide (2x/week)</h3>
+          <div class="muted">Batch the boring parts, keep the finishes different so it still feels fresh.</div>
+          <ul class="list" id="prepList"></ul>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <dialog id="mealDialog" class="mealDialog">
+    <div class="dlgHead">
+      <div>
+        <div id="dlgTitle" class="dlgTitle"></div>
+        <div id="dlgMeta" class="dlgMeta"></div>
+      </div>
+      <button id="dlgClose" class="miniBtn" type="button">Close</button>
+    </div>
+
+    <div class="dlgBody">
+      <div id="dlgDesc" class="dlgDesc"></div>
+
+      <div class="dlgGrid">
+        <div class="dlgChips">
+          <span class="chip" id="dlgKcal"></span>
+          <span class="chip" id="dlgTechnique"></span>
+          <span class="chip" id="dlgMood"></span>
+        </div>
+
+        <div class="li">
+          <div class="liTop"><strong>Gram recipe (scaled)</strong><span class="grams" id="dlgScale"></span></div>
+          <div class="muted dlgBlock" id="dlgGrams"></div>
+        </div>
+
+        <div class="li">
+          <div class="liTop"><strong>Fast method</strong><span class="grams">10–25 min active</span></div>
+          <div class="muted dlgBlock" id="dlgSteps"></div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="js/utils.js" defer></script>
+  <script src="js/storage.js" defer></script>
+  <script src="js/data.js" defer></script>
+  <script src="js/prep.js" defer></script>
+  <script src="js/render.js" defer></script>
+  <script src="js/dialog.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
